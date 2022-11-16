@@ -14,6 +14,7 @@ export default function Home() {
   const { loading, error, products } = state;
   const [domLoaded, setDomLoaded] = useState(false);
 
+  // Correction of the error Hydration
   useEffect(() => {
     setDomLoaded(true);
   }, []);
