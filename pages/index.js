@@ -12,6 +12,11 @@ export default function Home() {
   });
 
   const { loading, error, products } = state;
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,20 +31,24 @@ export default function Home() {
   }, []);
 
   return (
-    <Layout>
-      {loading ? (
-        <CircularProgress />
-      ) : error ? (
-        <Alert variant="danger">{error}</Alert>
-      ) : (
-        <Grid container spacing={3}>
-          {products.map((product) => (
-            <Grid item md={4} key={product.slug}>
-              <ProductItem product={product}></ProductItem>
+    <>
+      {domLoaded && (
+        <Layout>
+          {loading ? (
+            <CircularProgress />
+          ) : error ? (
+            <Alert variant="danger">{error}</Alert>
+          ) : (
+            <Grid container spacing={3}>
+              {products.map((product) => (
+                <Grid item md={4} key={product.slug}>
+                  <ProductItem product={product}></ProductItem>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          )}
+        </Layout>
       )}
-    </Layout>
+    </>
   );
 }
