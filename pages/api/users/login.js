@@ -1,7 +1,7 @@
-import nc from 'next-connect';
-import bcrypt from 'bcryptjs';
-import { signToken } from '../../../utils/auth';
-import client from '../../../utils/client';
+import nc from "next-connect";
+import bcrypt from "bcryptjs";
+import { signToken } from "../../../utils/auth";
+import client from "../../../utils/client";
 
 const handler = nc();
 
@@ -24,7 +24,7 @@ handler.post(async (req, res) => {
       token,
     });
   } else {
-    res.status(401).send({ message: 'Invalid email or password' });
+    res.status(401).send({ message: "Invalid email or password" });
   }
 });
 

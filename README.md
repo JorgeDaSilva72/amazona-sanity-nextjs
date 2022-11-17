@@ -82,3 +82,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     1. create user model
     2. create user create route api
     3. use it in the register screen
+15. Implement User Login API
+    1. create login api
+    2. use login api in login screen
+    3. implement logout
