@@ -20,12 +20,14 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useContext } from "react";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 
 function CartScreen() {
+  const router = useRouter();
   const {
     state: {
       cart: { cartItems },
@@ -59,9 +61,6 @@ function CartScreen() {
   };
   const removeItemHandler = (item) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
-    enqueueSnackbar(`${item.name} removed from the cart`, {
-      variant: "success",
-    });
   };
   return (
     <Layout title="Shopping Cart">
@@ -156,7 +155,14 @@ function CartScreen() {
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  <Button fullWidth color="primary" variant="contained">
+                  <Button
+                    onClick={() => {
+                      router.push("/shipping");
+                    }}
+                    fullWidth
+                    color="primary"
+                    variant="contained"
+                  >
                     Checkout
                   </Button>
                 </ListItem>

@@ -14,7 +14,6 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import Head from "next/head";
 import NextLink from "next/link";
 import classes from "../utils/classes";
@@ -57,7 +56,6 @@ export default function Layout({ title, description, children }) {
       },
     },
   });
-
   const darkModeChangeHandler = () => {
     dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
     const newDarkMode = !darkMode;
@@ -78,12 +76,13 @@ export default function Layout({ title, description, children }) {
     dispatch({ type: "USER_LOGOUT" });
     jsCookie.remove("userInfo");
     jsCookie.remove("cartItems");
+    jsCookie.remove("shippingAddress");
     router.push("/");
   };
   return (
     <>
       <Head>
-        <title>{title ? `${title} - Amazona` : " Amazona"}</title>
+        <title>{title ? `${title} - Sanity Amazona` : "Sanity Amazona"}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
       <ThemeProvider theme={theme}>
@@ -93,7 +92,7 @@ export default function Layout({ title, description, children }) {
             <Box display="flex" alignItems="center">
               <NextLink href="/" passHref>
                 <Link>
-                  <Typography sx={classes.brand}>Amazona</Typography>
+                  <Typography sx={classes.brand}>amazona</Typography>
                 </Link>
               </NextLink>
             </Box>
@@ -110,10 +109,10 @@ export default function Layout({ title, description, children }) {
                         color="secondary"
                         badgeContent={cart.cartItems.length}
                       >
-                        <ShoppingBasketOutlinedIcon />
+                        Cart
                       </Badge>
                     ) : (
-                      <ShoppingBasketOutlinedIcon />
+                      "Cart"
                     )}
                   </Typography>
                 </Link>
@@ -155,7 +154,7 @@ export default function Layout({ title, description, children }) {
           {children}
         </Container>
         <Box component="footer" sx={classes.footer}>
-          <Typography>All rights reserved. Amazona.</Typography>
+          <Typography>All rights reserved. Sanity Amazona.</Typography>
         </Box>
       </ThemeProvider>
     </>
