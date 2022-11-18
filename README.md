@@ -115,3 +115,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     7. render paypal button
     8. implement onApprove payment function
     9. create pay order api in backend
+21. Display Order History
+    1. create order history component
+    2. load orders of current user
+    3. render orders in the screen
