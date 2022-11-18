@@ -93,6 +93,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     3. implement submit handler
     4. handle redirect
 
-    5. create payment component
-    6. get payment method
-    7. implement submit handler
+17. Create Payment Screen
+    1. create payment component
+    2. get payment method
+    3. implement submit handler
