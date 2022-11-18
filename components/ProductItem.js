@@ -7,10 +7,10 @@ import {
   CardMedia,
   Rating,
   Typography,
-} from "@mui/material";
-import NextLink from "next/link";
-import React from "react";
-import { urlForThumbnail } from "../utils/image";
+} from '@mui/material';
+import NextLink from 'next/link';
+import React from 'react';
+import { urlForThumbnail } from '../utils/image';
 
 export default function ProductItem({ product, addToCartHandler }) {
   return (
@@ -29,7 +29,7 @@ export default function ProductItem({ product, addToCartHandler }) {
         </CardActionArea>
       </NextLink>
       <CardActions>
-        <Typography sx={{ mr: 5 }}>${product.price}</Typography>
+        <Typography>${product.price}</Typography>
         <Button
           size="small"
           color="primary"

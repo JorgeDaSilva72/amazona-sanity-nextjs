@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import Layout from "../components/Layout";
-import { useForm, Controller } from "react-hook-form";
-import NextLink from "next/link";
-import Form from "../components/Form";
+import React, { useContext, useEffect } from 'react';
+import Layout from '../components/Layout';
+import { useForm, Controller } from 'react-hook-form';
+import NextLink from 'next/link';
+import Form from '../components/Form';
 import {
   Button,
   Link,
@@ -10,13 +10,13 @@ import {
   ListItem,
   TextField,
   Typography,
-} from "@mui/material";
-import { useSnackbar } from "notistack";
-import axios from "axios";
-import { Store } from "../utils/Store";
-import { useRouter } from "next/router";
-import jsCookie from "js-cookie";
-import { getError } from "../utils/error";
+} from '@mui/material';
+import { useSnackbar } from 'notistack';
+import axios from 'axios';
+import { Store } from '../utils/Store';
+import { useRouter } from 'next/router';
+import jsCookie from 'js-cookie';
+import { getError } from '../utils/error';
 
 export default function LoginScreen() {
   const { state, dispatch } = useContext(Store);
@@ -25,7 +25,7 @@ export default function LoginScreen() {
   const { redirect } = router.query;
   useEffect(() => {
     if (userInfo) {
-      router.push(redirect || "/");
+      router.push(redirect || '/');
     }
   }, [router, userInfo, redirect]);
   const {
@@ -37,15 +37,15 @@ export default function LoginScreen() {
   const { enqueueSnackbar } = useSnackbar();
   const submitHandler = async ({ email, password }) => {
     try {
-      const { data } = await axios.post("/api/users/login", {
+      const { data } = await axios.post('/api/users/login', {
         email,
         password,
       });
-      dispatch({ type: "USER_LOGIN", payload: data });
-      jsCookie.set("userInfo", JSON.stringify(data));
-      router.push(redirect || "/");
+      dispatch({ type: 'USER_LOGIN', payload: data });
+      jsCookie.set('userInfo', JSON.stringify(data));
+      router.push(redirect || '/');
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: "error" });
+      enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
   return (
@@ -70,14 +70,14 @@ export default function LoginScreen() {
                   fullWidth
                   id="email"
                   label="Email"
-                  inputProps={{ type: "email" }}
+                  inputProps={{ type: 'email' }}
                   error={Boolean(errors.email)}
                   helperText={
                     errors.email
-                      ? errors.email.type === "pattern"
-                        ? "Email is not valid"
-                        : "Email is required"
-                      : ""
+                      ? errors.email.type === 'pattern'
+                        ? 'Email is not valid'
+                        : 'Email is required'
+                      : ''
                   }
                   {...field}
                 ></TextField>
@@ -99,14 +99,14 @@ export default function LoginScreen() {
                   fullWidth
                   id="password"
                   label="Password"
-                  inputProps={{ type: "password" }}
+                  inputProps={{ type: 'password' }}
                   error={Boolean(errors.password)}
                   helperText={
                     errors.password
-                      ? errors.password.type === "minLength"
-                        ? "Password length is more than 5"
-                        : "Password is required"
-                      : ""
+                      ? errors.password.type === 'minLength'
+                        ? 'Password length is more than 5'
+                        : 'Password is required'
+                      : ''
                   }
                   {...field}
                 ></TextField>
@@ -119,8 +119,8 @@ export default function LoginScreen() {
             </Button>
           </ListItem>
           <ListItem>
-            Do not have an account?{" "}
-            <NextLink href={`/register?redirect=${redirect || "/"}`} passHref>
+            Do not have an account?{' '}
+            <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
               <Link>Register</Link>
             </NextLink>
           </ListItem>

@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 import {
   AppBar,
   Badge,
@@ -13,14 +13,14 @@ import {
   ThemeProvider,
   Toolbar,
   Typography,
-} from "@mui/material";
-import Head from "next/head";
-import NextLink from "next/link";
-import classes from "../utils/classes";
-import { useContext, useState } from "react";
-import { Store } from "../utils/Store";
-import jsCookie from "js-cookie";
-import { useRouter } from "next/router";
+} from '@mui/material';
+import Head from 'next/head';
+import NextLink from 'next/link';
+import classes from '../utils/classes';
+import { useContext, useState } from 'react';
+import { Store } from '../utils/Store';
+import jsCookie from 'js-cookie';
+import { useRouter } from 'next/router';
 
 export default function Layout({ title, description, children }) {
   const router = useRouter();
@@ -30,36 +30,36 @@ export default function Layout({ title, description, children }) {
     components: {
       MuiLink: {
         defaultProps: {
-          underline: "hover",
+          underline: 'hover',
         },
       },
     },
     typography: {
       h1: {
-        fontSize: "1.6rem",
+        fontSize: '1.6rem',
         fontWeight: 400,
-        margin: "1rem 0",
+        margin: '1rem 0',
       },
       h2: {
-        fontSize: "1.4rem",
+        fontSize: '1.4rem',
         fontWeight: 400,
-        margin: "1rem 0",
+        margin: '1rem 0',
       },
     },
     palette: {
-      mode: darkMode ? "dark" : "light",
+      mode: darkMode ? 'dark' : 'light',
       primary: {
-        main: "#f0c000",
+        main: '#f0c000',
       },
       secondary: {
-        main: "#208080",
+        main: '#208080',
       },
     },
   });
   const darkModeChangeHandler = () => {
-    dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
+    dispatch({ type: darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON' });
     const newDarkMode = !darkMode;
-    jsCookie.set("darkMode", newDarkMode ? "ON" : "OFF");
+    jsCookie.set('darkMode', newDarkMode ? 'ON' : 'OFF');
   };
   const [anchorEl, setAnchorEl] = useState(null);
   const loginMenuCloseHandler = (e, redirect) => {
@@ -73,17 +73,17 @@ export default function Layout({ title, description, children }) {
   };
   const logoutClickHandler = () => {
     setAnchorEl(null);
-    dispatch({ type: "USER_LOGOUT" });
-    jsCookie.remove("userInfo");
-    jsCookie.remove("cartItems");
-    jsCookie.remove("shippingAddress");
-    jsCookie.remove("paymentMethod");
-    router.push("/");
+    dispatch({ type: 'USER_LOGOUT' });
+    jsCookie.remove('userInfo');
+    jsCookie.remove('cartItems');
+    jsCookie.remove('shippingAddress');
+    jsCookie.remove('paymentMethod');
+    router.push('/');
   };
   return (
     <>
       <Head>
-        <title>{title ? `${title} - Sanity Amazona` : "Sanity Amazona"}</title>
+        <title>{title ? `${title} - Sanity Amazona` : 'Sanity Amazona'}</title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
       <ThemeProvider theme={theme}>
@@ -113,7 +113,7 @@ export default function Layout({ title, description, children }) {
                         Cart
                       </Badge>
                     ) : (
-                      "Cart"
+                      'Cart'
                     )}
                   </Typography>
                 </Link>
@@ -136,7 +136,7 @@ export default function Layout({ title, description, children }) {
                     onClose={loginMenuCloseHandler}
                   >
                     <MenuItem
-                      onClick={(e) => loginMenuCloseHandler(e, "/profile")}
+                      onClick={(e) => loginMenuCloseHandler(e, '/profile')}
                     >
                       Profile
                     </MenuItem>

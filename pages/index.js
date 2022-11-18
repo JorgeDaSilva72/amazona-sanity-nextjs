@@ -1,13 +1,13 @@
-import { Alert, CircularProgress, Grid, Typography } from "@mui/material";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { useSnackbar } from "notistack";
-import { useContext, useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import ProductItem from "../components/ProductItem";
-import client from "../utils/client";
-import { urlForThumbnail } from "../utils/image";
-import { Store } from "../utils/Store";
+import { Alert, CircularProgress, Grid, Typography } from '@mui/material';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
+import { useContext, useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import ProductItem from '../components/ProductItem';
+import client from '../utils/client';
+import { urlForThumbnail } from '../utils/image';
+import { Store } from '../utils/Store';
 
 export default function Home() {
   const {
@@ -18,17 +18,10 @@ export default function Home() {
   const { enqueueSnackbar } = useSnackbar();
   const [state, setState] = useState({
     products: [],
-    error: "",
+    error: '',
     loading: true,
   });
-
   const { loading, error, products } = state;
-  const [domLoaded, setDomLoaded] = useState(false);
-
-  // Correction of the error Hydration
-  useEffect(() => {
-    setDomLoaded(true);
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,11 +40,11 @@ export default function Home() {
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) {
-      enqueueSnackbar("Sorry. Product is out of stock", { variant: "error" });
+      enqueueSnackbar('Sorry. Product is out of stock', { variant: 'error' });
       return;
     }
     dispatch({
-      type: "CART_ADD_ITEM",
+      type: 'CART_ADD_ITEM',
       payload: {
         _key: product._id,
         name: product.name,
@@ -63,33 +56,29 @@ export default function Home() {
       },
     });
     enqueueSnackbar(`${product.name} added to the cart`, {
-      variant: "success",
+      variant: 'success',
     });
-    router.push("/cart");
+    router.push('/cart');
   };
 
   return (
-    <>
-      {domLoaded && (
-        <Layout>
-          {loading ? (
-            <CircularProgress />
-          ) : error ? (
-            <Alert variant="danger">{error}</Alert>
-          ) : (
-            <Grid container spacing={3}>
-              {products.map((product) => (
-                <Grid item md={4} key={product.slug}>
-                  <ProductItem
-                    product={product}
-                    addToCartHandler={addToCartHandler}
-                  ></ProductItem>
-                </Grid>
-              ))}
+    <Layout>
+      {loading ? (
+        <CircularProgress />
+      ) : error ? (
+        <Alert variant="danger">{error}</Alert>
+      ) : (
+        <Grid container spacing={3}>
+          {products.map((product) => (
+            <Grid item md={4} key={product.slug}>
+              <ProductItem
+                product={product}
+                addToCartHandler={addToCartHandler}
+              ></ProductItem>
             </Grid>
-          )}
-        </Layout>
+          ))}
+        </Grid>
       )}
-    </>
+    </Layout>
   );
 }
