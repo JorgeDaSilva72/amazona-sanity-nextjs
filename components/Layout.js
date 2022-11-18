@@ -21,6 +21,7 @@ import { useContext, useState } from "react";
 import { Store } from "../utils/Store";
 import jsCookie from "js-cookie";
 import { useRouter } from "next/router";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 export default function Layout({ title, description, children }) {
   const router = useRouter();
@@ -93,7 +94,7 @@ export default function Layout({ title, description, children }) {
             <Box display="flex" alignItems="center">
               <NextLink href="/" passHref>
                 <Link>
-                  <Typography sx={classes.brand}>amazona</Typography>
+                  <Typography sx={classes.brand}>KRIST STORE</Typography>
                 </Link>
               </NextLink>
             </Box>
@@ -110,10 +111,10 @@ export default function Layout({ title, description, children }) {
                         color="secondary"
                         badgeContent={cart.cartItems.length}
                       >
-                        Cart
+                        <ShoppingBasketIcon />
                       </Badge>
                     ) : (
-                      "Cart"
+                      <ShoppingBasketIcon />
                     )}
                   </Typography>
                 </Link>
@@ -162,7 +163,7 @@ export default function Layout({ title, description, children }) {
           {children}
         </Container>
         <Box component="footer" sx={classes.footer}>
-          <Typography>All rights reserved. Sanity Amazona.</Typography>
+          <Typography>All rights reserved.</Typography>
         </Box>
       </ThemeProvider>
     </>
