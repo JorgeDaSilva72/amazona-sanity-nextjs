@@ -13,20 +13,21 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from '@mui/material';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
-import NextLink from 'next/link';
-import CheckoutWizard from '../components/CheckoutWizard';
-import Layout from '../components/Layout';
-import classes from '../utils/classes';
-import { Store } from '../utils/Store';
-import { useSnackbar } from 'notistack';
-import { getError } from '../utils/error';
-import axios from 'axios';
-import jsCookie from 'js-cookie';
-import dynamic from 'next/dynamic';
+} from "@mui/material";
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+import React, { useContext, useEffect, useState } from "react";
+import NextLink from "next/link";
+import CheckoutWizard from "../components/CheckoutWizard";
+import Layout from "../components/Layout";
+import classes from "../utils/classes";
+import { Store } from "../utils/Store";
+import { useSnackbar } from "notistack";
+import { getError } from "../utils/error";
+import axios from "axios";
+import jsCookie from "js-cookie";
+import dynamic from "next/dynamic";
 
 function PlaceOrderScreen() {
   const { enqueueSnackbar } = useSnackbar();
@@ -47,10 +48,10 @@ function PlaceOrderScreen() {
 
   useEffect(() => {
     if (!paymentMethod) {
-      router.push('/payment');
+      router.push("/payment");
     }
     if (cartItems.length === 0) {
-      router.push('/cart');
+      router.push("/cart");
     }
   }, [cartItems, paymentMethod, router]);
 
@@ -58,7 +59,7 @@ function PlaceOrderScreen() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        '/api/orders',
+        "/api/orders",
         {
           orderItems: cartItems.map((x) => ({
             ...x,
@@ -78,13 +79,14 @@ function PlaceOrderScreen() {
           },
         }
       );
-      dispatch({ type: 'CART_CLEAR' });
-      jsCookie.remove('cartItems');
+
+      dispatch({ type: "CART_CLEAR" });
+      jsCookie.remove("cartItems");
       setLoading(false);
       router.push(`/order/${data}`);
     } catch (err) {
       setLoading(false);
-      enqueueSnackbar(getError(err), { variant: 'error' });
+      enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
   return (
@@ -104,13 +106,13 @@ function PlaceOrderScreen() {
                 </Typography>
               </ListItem>
               <ListItem>
-                {shippingAddress.fullName}, {shippingAddress.address},{' '}
-                {shippingAddress.city}, {shippingAddress.postalCode},{' '}
+                {shippingAddress.fullName}, {shippingAddress.address},{" "}
+                {shippingAddress.city}, {shippingAddress.postalCode},{" "}
                 {shippingAddress.country}
               </ListItem>
               <ListItem>
                 <Button
-                  onClick={() => router.push('/shipping')}
+                  onClick={() => router.push("/shipping")}
                   variant="contianed"
                   color="secondary"
                 >
@@ -129,7 +131,7 @@ function PlaceOrderScreen() {
               <ListItem>{paymentMethod}</ListItem>
               <ListItem>
                 <Button
-                  onClick={() => router.push('/payment')}
+                  onClick={() => router.push("/payment")}
                   variant="contianed"
                   color="secondary"
                 >
